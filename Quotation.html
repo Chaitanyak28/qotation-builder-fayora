@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quotation - Fayora filmss & media</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 30px 15px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header & Branding with Logo */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 75px;
+      height: 75px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    .logo-placeholder-text {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 600;
+      padding: 4px;
+    }
+
+    .header-title h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .header-title p {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 2px;
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: var(--danger);
+    }
+    .btn-danger:hover {
+      background: #fecaca;
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    /* Preset Selection Bar */
+    .preset-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 25px;
+    }
+
+    .preset-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .preset-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Client Details Section */
+    .client-details {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .field-group input, 
+    .field-group textarea {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .field-group input:focus,
+    .field-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    /* Item Block Card */
+    .item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      gap: 15px;
+    }
+
+    .item-title-input {
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--primary);
+      width: 100%;
+    }
+    .item-title-input:focus {
+      border-bottom: 1px dashed var(--accent);
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+
+    td input {
+      width: 100%;
+      border: 1px solid transparent;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    td input:hover, td input:focus {
+      border-color: var(--border);
+      background: #fafafa;
+    }
+
+    .col-num {
+      width: 110px;
+      text-align: right;
+    }
+
+    .col-qty {
+      width: 70px;
+      text-align: center;
+    }
+
+    .col-action {
+      width: 40px;
+      text-align: center;
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .item-controls-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pkg-qty-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .pkg-qty-box input {
+      width: 50px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 2px 4px;
+      outline: none;
+      background: #fff;
+    }
+
+    .item-subtotal {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: right;
+    }
+
+    .unit-rate-hint {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      display: block;
+    }
+
+    /* Overall Summary Card */
+    .grand-summary {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 360px;
+      font-size: 15px;
+    }
+
+    .grand-total {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      border-top: 2px solid var(--border);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .preset-card, .actions-bar, .no-print {
+        display: none !important;
+      }
+      .logo-container {
+        border: none !important;
+        background: transparent !important;
+      }
+      .logo-placeholder-text {
+        display: none !important;
+      }
+      .item-card, .client-details, .grand-summary {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+      }
+      td input {
+        border: none;
+        padding: 0;
+      }
+      .item-title-input {
+        border: none;
+      }
+      .pkg-qty-box {
+        background: transparent;
+        border: none;
+        padding: 0;
+      }
+      .pkg-qty-box input {
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Navigation & Header with Logo -->
+  <div class="header">
+    <div class="brand-section">
+      <!-- Clickable Logo Box -->
+      <div class="logo-container" onclick="document.getElementById('logoFileInput').click()" title="Click to upload logo">
+        <span class="logo-placeholder-text" id="logoText">+ Upload<br>Logo</span>
+        <img id="logoPreview" alt="Fayora Logo" />
+      </div>
+      <input type="file" id="logoFileInput" accept="image/*" style="display:none;" onchange="previewLogo(event)" />
+
+      <div class="header-title">
+        <h1>Fayora filmss & media</h1>
+        <p>Quotation</p>
+      </div>
+    </div>
+
+    <div class="actions-bar">
+      <button class="btn-primary" onclick="window.print()">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+          <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+        </svg>
+        Export to PDF / Print
+      </button>
+      <button class="btn-outline" onclick="addNewBlankItem()">+ Blank Item</button>
+      <button class="btn-danger btn-sm" onclick="clearCart()">Clear All</button>
+    </div>
+  </div>
+
+  <!-- Client Details -->
+  <div class="client-details">
+    <div class="field-group">
+      <label>Client / Brand Name</label>
+      <input type="text" placeholder="e.g. Acme Studio" />
+    </div>
+    <div class="field-group">
+      <label>Project / Campaign</label>
+      <input type="text" placeholder="e.g. Product Campaign" />
+    </div>
+    <div class="field-group">
+      <label>Date</label>
+      <input type="date" id="docDate" />
+    </div>
+  </div>
+
+  <!-- Presets from Framework -->
+  <div class="preset-card no-print">
+    <h3>Add Framework Template</h3>
+    <div class="preset-buttons">
+      <button class="btn-outline btn-sm" onclick="addPreset('perReel')">+ Per Reel (Body M4 + Gimbal)</button>
+      <button class="btn-outline btn-sm" onclick="addPreset('horizontal')">+ Horizontal Film (A7S3)</button>
+      <button class="btn-outline btn-sm" onclick="addPreset('photoFull')">+ Photography (Full Day - 8h)</button>
+      <button class="btn-outline btn-sm" onclick="addPreset('photoHalf')">+ Photography (Half Day - 4h)</button>
+      <button class="btn-outline btn-sm" onclick="addPreset('phoneReel')">+ Phone Reel</button>
+    </div>
+  </div>
+
+  <!-- Items Cart Container -->
+  <div id="itemsContainer"></div>
+
+  <!-- Final Cart Total Summary -->
+  <div class="grand-summary">
+    <div class="summary-row">
+      <span>Total Services Configured:</span>
+      <span id="totalItemsCount">0</span>
+    </div>
+    <div class="summary-row grand-total">
+      <span>Final Quotation Total:</span>
+      <span id="grandTotal">₹0</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('docDate').valueAsDate = new Date();
+
+  // Function to preview and set uploaded logo
+  function previewLogo(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('logoPreview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        document.getElementById('logoText').style.display = 'none';
+        document.querySelector('.logo-container').style.border = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  const presets = {
+    perReel: {
+      title: "Per Reel Production (Body M4 + 1 Lens + Gimbal)",
+      packageQty: 1,
+      rows: [
+        { desc: "Equipment Rent (Body M4 + 1 Lens + Gimbal)", qty: 1, rate: 3000 },
+        { desc: "Post Production / Editing", qty: 1, rate: 1500 },
+        { desc: "Crew Operating", qty: 1, rate: 6000 },
+        { desc: "Travel & Food (T&F)", qty: 1, rate: 500 },
+        { desc: "Overhead & Production", qty: 1, rate: 2000 },
+        { desc: "Add-on: Wireless Mic System", qty: 0, rate: 500 },
+        { desc: "Add-on: Storyboard & Scripting", qty: 0, rate: 1000 }
+      ]
+    },
+    horizontal: {
+      title: "Horizontal Film (Single-Angle, A7S3 + 2 Lens + Lights)",
+      packageQty: 1,
+      rows: [
+        { desc: "Equipment Rent (Body A7S3 + 2 Lens + Mic + Light + Gimbal)", qty: 1, rate: 5500 },
+        { desc: "Post Production / Editing", qty: 1, rate: 3000 },
+        { desc: "Crew Operating", qty: 1, rate: 10000 },
+        { desc: "Travel & Food (T&F)", qty: 1, rate: 1000 },
+        { desc: "Overhead & Production", qty: 1, rate: 4000 },
+        { desc: "Add-on: Storyboard", qty: 0, rate: 1500 }
+      ]
+    },
+    photoFull: {
+      title: "Photography - Full Day (8 Hours / ~30 Photos)",
+      packageQty: 1,
+      rows: [
+        { desc: "Equipment Rent (Body + 2 Lens + Flash + Softbox)", qty: 1, rate: 3500 },
+        { desc: "Post Production / Retouching (~30 edits)", qty: 1, rate: 1000 },
+        { desc: "Photographer Operating", qty: 1, rate: 8000 },
+        { desc: "Travel & Food (T&F)", qty: 1, rate: 500 },
+        { desc: "Overhead & Production", qty: 1, rate: 2000 },
+        { desc: "Add-on: Moodboard & Concept Deck", qty: 0, rate: 1000 }
+      ]
+    },
+    photoHalf: {
+      title: "Photography - Half Day (4 Hours / ~15 Photos)",
+      packageQty: 1,
+      rows: [
+        { desc: "Equipment Rent (Body + 2 Lens + Flash + Softbox)", qty: 1, rate: 3500 },
+        { desc: "Post Production / Retouching (~15 edits)", qty: 1, rate: 500 },
+        { desc: "Photographer Operating", qty: 1, rate: 5000 },
+        { desc: "Travel & Food (T&F)", qty: 1, rate: 500 },
+        { desc: "Overhead & Production", qty: 1, rate: 1000 },
+        { desc: "Add-on: Moodboard & Concept Deck", qty: 0, rate: 1000 }
+      ]
+    },
+    phoneReel: {
+      title: "Phone Reel Production",
+      packageQty: 1,
+      rows: [
+        { desc: "Phone Shoot & Operating", qty: 1, rate: 2500 },
+        { desc: "Post Production / Reel Edit", qty: 1, rate: 1000 },
+        { desc: "Travel & Food (T&F)", qty: 1, rate: 500 },
+        { desc: "Overhead & Production", qty: 1, rate: 1000 },
+        { desc: "Add-on: Wireless Lapel Mic", qty: 0, rate: 500 }
+      ]
+    }
+  };
+
+  let items = [];
+
+  function addPreset(key) {
+    const template = presets[key];
+    const newItem = {
+      id: Date.now() + Math.random(),
+      title: template.title,
+      packageQty: template.packageQty || 1,
+      rows: template.rows.map(r => ({ ...r }))
+    };
+    items.push(newItem);
+    render();
+  }
+
+  function addNewBlankItem() {
+    items.push({
+      id: Date.now() + Math.random(),
+      title: "Custom Service / Deliverable",
+      packageQty: 1,
+      rows: [
+        { desc: "Deliverable / Scope description", qty: 1, rate: 0 }
+      ]
+    });
+    render();
+  }
+
+  function removeItem(index) {
+    items.splice(index, 1);
+    render();
+  }
+
+  function addRow(itemIndex) {
+    items[itemIndex].rows.push({ desc: "New Line Item / Add-on", qty: 1, rate: 0 });
+    render();
+  }
+
+  function removeRow(itemIndex, rowIndex) {
+    items[itemIndex].rows.splice(rowIndex, 1);
+    render();
+  }
+
+  function clearCart() {
+    if (confirm("Clear all items?")) {
+      items = [];
+      render();
+    }
+  }
+
+  function formatCurrency(num) {
+    return "₹" + Number(num || 0).toLocaleString("en-IN");
+  }
+
+  function render() {
+    const container = document.getElementById("itemsContainer");
+    container.innerHTML = "";
+
+    let grandTotal = 0;
+
+    items.forEach((item, itemIdx) => {
+      let unitSubtotal = 0;
+
+      item.rows.forEach(r => {
+        unitSubtotal += (Number(r.qty) || 0) * (Number(r.rate) || 0);
+      });
+
+      const pkgMultiplier = Math.max(1, Number(item.packageQty) || 1);
+      const totalItemAmount = unitSubtotal * pkgMultiplier;
+      grandTotal += totalItemAmount;
+
+      const itemCard = document.createElement("div");
+      itemCard.className = "item-card";
+
+      itemCard.innerHTML = `
+        <div class="item-header">
+          <input 
+            type="text" 
+            class="item-title-input" 
+            value="${item.title}" 
+            onchange="items[${itemIdx}].title = this.value"
+          />
+          <button class="btn-danger btn-sm no-print" onclick="removeItem(${itemIdx})">Remove Service</button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Scope / Line Item Breakdown</th>
+                <th class="col-qty">Qty</th>
+                <th class="col-num">Rate (₹)</th>
+                <th class="col-num">Total</th>
+                <th class="col-action no-print"></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${item.rows.map((row, rIdx) => {
+                const rowTotal = (Number(row.qty) || 0) * (Number(row.rate) || 0);
+                return `
+                  <tr>
+                    <td>
+                      <input 
+                        type="text" 
+                        value="${row.desc}" 
+                        oninput="items[${itemIdx}].rows[${rIdx}].desc = this.value"
+                      />
+                    </td>
+                    <td class="col-qty">
+                      <input 
+                        type="number" 
+                        min="0"
+                        value="${row.qty}" 
+                        oninput="items[${itemIdx}].rows[${rIdx}].qty = this.value; renderTotalsOnly()"
+                      />
+                    </td>
+                    <td class="col-num">
+                      <input 
+                        type="number" 
+                        min="0"
+                        value="${row.rate}" 
+                        oninput="items[${itemIdx}].rows[${rIdx}].rate = this.value; renderTotalsOnly()"
+                      />
+                    </td>
+                    <td class="col-num" id="row-total-${itemIdx}-${rIdx}">
+                      ${formatCurrency(rowTotal)}
+                    </td>
+                    <td class="col-action no-print">
+                      <button class="btn-danger btn-sm" style="padding: 2px 6px;" onclick="removeRow(${itemIdx},${rIdx})">×</button>
+                    </td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="item-footer">
+          <div class="item-controls-left">
+            <button class="btn-outline btn-sm no-print" onclick="addRow(${itemIdx})">+ Add Line Item / Add-on</button>
+            <div class="pkg-qty-box">
+              <span>Quantity (Reels / Deliverables):</span>
+              <input 
+                type="number" 
+                min="1" 
+                value="${item.packageQty || 1}" 
+                oninput="items[${itemIdx}].packageQty = this.value; renderTotalsOnly()" 
+              />
+            </div>
+          </div>
+          <div class="item-subtotal">
+            <span class="unit-rate-hint" id="unit-hint-${itemIdx}">
+              Base: ${formatCurrency(unitSubtotal)} × ${pkgMultiplier}
+            </span>
+            Package Total: <span id="item-subtotal-${itemIdx}">${formatCurrency(totalItemAmount)}</span>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(itemCard);
+    });
+
+    document.getElementById("totalItemsCount").innerText = items.length;
+    document.getElementById("grandTotal").innerText = formatCurrency(grandTotal);
+  }
+
+  function renderTotalsOnly() {
+    let grandTotal = 0;
+    items.forEach((item, itemIdx) => {
+      let unitSubtotal = 0;
+      item.rows.forEach((row, rIdx) => {
+        const rowTotal = (Number(row.qty) || 0) * (Number(row.rate) || 0);
+        unitSubtotal += rowTotal;
+        const cell = document.getElementById(`row-total-${itemIdx}-${rIdx}`);
+        if (cell) cell.innerText = formatCurrency(rowTotal);
+      });
+
+      const pkgMultiplier = Math.max(1, Number(item.packageQty) || 1);
+      const totalItemAmount = unitSubtotal * pkgMultiplier;
+      grandTotal += totalItemAmount;
+
+      const unitHint = document.getElementById(`unit-hint-${itemIdx}`);
+      if (unitHint) {
+        unitHint.innerText = `Base: ${formatCurrency(unitSubtotal)} × ${pkgMultiplier}`;
+      }
+
+      const subtotalEl = document.getElementById(`item-subtotal-${itemIdx}`);
+      if (subtotalEl) {
+        subtotalEl.innerText = formatCurrency(totalItemAmount);
+      }
+    });
+
+    document.getElementById("grandTotal").innerText = formatCurrency(grandTotal);
+  }
+
+  addPreset('perReel');
+</script>
+
+</body>
+</html>
