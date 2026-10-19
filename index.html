@@ -426,11 +426,10 @@
   <!-- Top Navigation & Header with Logo -->
   <div class="header">
     <div class="brand-section">
-      <!-- Clickable Logo Box -->
-      <div class="logo-container" onclick="document.getElementById('logoFileInput').click()" title="Click to upload logo">
-        <span class="logo-placeholder-text" id="logoText">+ Upload<br>Logo</span>
-        <img id="logoPreview" alt="Fayora Logo" />
-      </div>
+      <!-- Direct Logo from Repository -->
+<div class="logo-container" style="border: none; background: transparent;">
+  <img id="logoPreview" src="logo.png" style="display: block; width: 100%; height: 100%; object-fit: contain;" alt="Fayora Logo" />
+</div>
       <input type="file" id="logoFileInput" accept="image/*" style="display:none;" onchange="previewLogo(event)" />
 
       <div class="header-title">
